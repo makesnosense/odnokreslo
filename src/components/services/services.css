@@ -1,0 +1,60 @@
+.whitespace {
+  display: inline-block;
+  width: 0.1667em;
+}
+
+.service-type-section {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .section-title {
+    margin-bottom: 3rem;
+  }
+
+  .services-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-item {
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    gap: 2rem;
+  }
+
+  .service-item.single-price {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .service-item.multi-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .service-item-prices-by-length {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+
+  .service-item:last-of-type {
+    border-bottom: none;
+  }
+
+  .price-row {
+    display: grid;
+    grid-template-columns: auto 5em;
+    gap: 2rem;
+    justify-content: flex-end;
+  }
+
+  .price {
+    text-align: right;
+  }
+}
