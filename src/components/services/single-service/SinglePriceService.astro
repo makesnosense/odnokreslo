@@ -1,0 +1,15 @@
+---
+interface Props {
+  name: string;
+  price: number;
+}
+
+const { name, price } = Astro.props;
+---
+
+<div class="service-item single-price">
+  <h3>{name}</h3>
+  <div class="price-container">
+    <span class="price">{price}</span>
+  </div>
+</div>

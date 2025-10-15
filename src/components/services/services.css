@@ -1,8 +1,3 @@
-.whitespace {
-  display: inline-block;
-  width: 0.1667em;
-}
-
 .service-type-section {
   padding: 4rem;
   display: flex;
@@ -54,7 +49,17 @@
     justify-content: flex-end;
   }
 
-  .price {
+  .price-container {
     text-align: right;
   }
+
+  .price {
+    white-space: nowrap;
+  }
+
+  .price::after {
+    content: '₽';
+    padding-left: 0.1667em;
+  }
+
 }

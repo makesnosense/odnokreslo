@@ -1,37 +1,35 @@
 ---
+import SinglePriceService from "./single-service/SinglePriceService.astro";
 import "./services.css";
+
+const haircutServices = [
+  {
+    name: "Стрижка",
+    price: 3000,
+  },
+  {
+    name: "Стрижка чёлки",
+    price: 2000,
+  },
+  {
+    name: "Стрижка концов",
+    price: 2000,
+  },
+  {
+    name: "Стрижка бороды",
+    price: 2000,
+  },
+];
 ---
 
 <section class="service-type-section">
-  <h2 class="section-title">стрижка</h2>
+  <h2 class="section-title">Стрижка</h2>
 
   <div class="services-list">
-    <div class="service-item">
-      <h3>Стрижка</h3>
-      <div class="price">
-        <span>3000<span class="whitespace"></span>₽</span>
-      </div>
-    </div>
-
-    <div class="service-item">
-      <h3>Стрижка чёлки</h3>
-      <div class="price">
-        <span>2000<span class="whitespace"></span>₽</span>
-      </div>
-    </div>
-
-    <div class="service-item">
-      <h3>Стрижка концов</h3>
-      <div class="price">
-        <span>2000<span class="whitespace"></span>₽</span>
-      </div>
-    </div>
-
-    <div class="service-item">
-      <h3>Стрижка бороды</h3>
-      <div class="price">
-        <span>2000<span class="whitespace"></span>₽</span>
-      </div>
-    </div>
+    {
+      haircutServices.map((service) => (
+        <SinglePriceService name={service.name} price={service.price} />
+      ))
+    }
   </div>
 </section>

@@ -1,66 +1,64 @@
 ---
+import SinglePriceService from "./single-service/SinglePriceService.astro";
+import MultiPriceService from "./single-service/MultiPriceService.astro";
 import "./services.css";
+import type {
+  SinglePriceServiceData,
+  MultiPriceServiceData,
+} from "./single-service/service-types";
+
+type Service = SinglePriceServiceData | MultiPriceServiceData;
+
+const coloringServices: Service[] = [
+  {
+    name: "Окрашивание корней",
+    price: 7000,
+  },
+  {
+    name: "Тонирование",
+    prices: {
+      короткие: 4000,
+      средние: 4000,
+      длинные: 5000,
+    },
+  },
+  {
+    name: "Тотал блонд",
+    prices: {
+      короткие: 10000,
+      средние: 15000,
+      длинные: 20000,
+    },
+  },
+
+  {
+    name: "Air Touch",
+    prices: {
+      средние: 20000,
+      длинные: 25000,
+    },
+  },
+];
+
+const isMultiPriceService = (
+  service: Service,
+): service is MultiPriceServiceData => {
+  return "prices" in service;
+};
 ---
 
 <section class="service-type-section">
-  <h2 class="section-title">окрашивание</h2>
+  <h2 class="section-title">Окрашивание</h2>
 
   <div class="services-list">
-    <div class="service-item single-price">
-      <h3>Окрашивание корней</h3>
-      <div class="price">
-        <span>7000<span class="whitespace"></span>₽</span>
-      </div>
-    </div>
-
-    <div class="service-item multi-price">
-      <h3>тонирование</h3>
-      <div class="service-item-prices-by-length">
-        <div class="price-row">
-          <span class="length">короткие</span>
-          <span class="price">4000<span class="whitespace"></span>₽</span>
-        </div>
-        <div class="price-row">
-          <span class="length">средние</span>
-          <span class="price">4000<span class="whitespace"></span>₽</span>
-        </div>
-        <div class="price-row">
-          <span class="length">длинные</span>
-          <span class="price">5000<span class="whitespace"></span>₽</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="service-item multi-price">
-      <h3>тотал блонд</h3>
-      <div class="service-item-prices-by-length">
-        <div class="price-row">
-          <span class="length">короткие</span>
-          <span class="price">10000<span class="whitespace"></span>₽</span>
-        </div>
-        <div class="price-row">
-          <span class="length">средние</span>
-          <span class="price">15000<span class="whitespace"></span>₽</span>
-        </div>
-        <div class="price-row">
-          <span class="length">длинные</span>
-          <span class="price">20000<span class="whitespace"></span>₽</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="service-item multi-price">
-      <h3>Air Touch</h3>
-      <div class="service-item-prices-by-length">
-        <div class="price-row">
-          <span class="length">средние</span>
-          <span class="price">20000<span class="whitespace"></span>₽</span>
-        </div>
-        <div class="price-row">
-          <span class="length">длинные</span>
-          <span class="price">25000<span class="whitespace"></span>₽</span>
-        </div>
-      </div>
-    </div>
+    {
+      coloringServices.map((service) =>
+        isMultiPriceService(service) ? (
+          <MultiPriceService name={service.name} prices={service.prices} />
+        ) : (
+          <SinglePriceService name={service.name} price={service.price} />
+        ),
+      )
+    }
   </div>
 </section>

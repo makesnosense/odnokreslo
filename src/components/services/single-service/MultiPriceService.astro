@@ -1,0 +1,24 @@
+---
+interface Props {
+  name: string;
+  prices: Record<string, number>;
+}
+
+const { name, prices } = Astro.props;
+---
+
+<div class="service-item multi-price">
+  <h3>{name}</h3>
+  <div class="service-item-prices-by-length">
+    {
+      Object.entries(prices).map(([length, price]) => (
+        <div class="price-row">
+          <span class="length">{length}</span>
+          <div class="price-container">
+            <span class="price">{price}</span>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
