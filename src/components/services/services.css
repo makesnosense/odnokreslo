@@ -1,5 +1,5 @@
 .service-type-section {
-  --gap-between-length-and-price: clamp(0.5rem, 1.5vw, 2rem);
+  --gap-between-length-and-price: clamp(1rem, 3vw, 4rem);
 
 
   display: flex;
@@ -48,7 +48,7 @@
 
 .price-row {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto 3.5em;
   gap: var(--gap-between-length-and-price);
   justify-content: flex-end;
 }
