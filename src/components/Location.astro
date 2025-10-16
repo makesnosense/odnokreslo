@@ -1,41 +1,41 @@
 <section class="location-section">
-  <div class="map-container">
-    <iframe
-      src="https://yandex.ru/map-widget/v1/?um=constructor%3A34fc59bcd1ab3427786faff1648aee9a1e69e8a3e653e7bf8f43ccc7474dc174&source=constructor"
-      width="470"
-      height="380"
-      title="расположение студии на яндекс картах"
-      loading="lazy"
-    >
-    </iframe>
-  </div>
-
   <div class="address">
     <p>Москва, Новый Арбат, 34с1</p>
     <p>ПН-ВС: 13:00–22:00</p>
     <p>по предварительной записи</p>
   </div>
-
-  <style>
-    .location-section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-
-      column-gap: 3rem;
-      row-gap: 1rem;
-
-      padding: var(--padding-vertical) var(--padding-horizontal);
-
-      .map-container iframe {
-        filter: grayscale(100%) contrast(1.2) brightness(0.95);
-        border: solid 1px rgba(0, 0, 0, 0.3);
-      }
-
-      .address {
-        line-height: 2;
-      }
-    }
-  </style>
+  <div class="map-container">
+    <iframe
+      src="https://yandex.ru/map-widget/v1/?um=constructor%3A34fc59bcd1ab3427786faff1648aee9a1e69e8a3e653e7bf8f43ccc7474dc174&source=constructor"
+      title="расположение студии на яндекс картах"
+      loading="lazy"></iframe>
+  </div>
 </section>
+
+<style>
+  .location-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1rem;
+    padding-top: 1rem;
+  }
+
+  .address {
+    line-height: 2;
+    text-align: center;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 320px;
+    padding: 0;
+    iframe {
+      width: 100%;
+      height: 100%;
+      filter: grayscale(100%) contrast(1.2) brightness(0.95);
+      border: solid 1px rgba(0, 0, 0, 0.3);
+    }
+  }
+</style>
