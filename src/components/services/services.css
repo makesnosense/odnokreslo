@@ -33,12 +33,21 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
+  @media (max-width: 350px) {
+    flex-direction: column;
+  }
+
 }
 
 .service-item-prices-by-length {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  @media (max-width: 350px) {
+    width: 100%;
+  }
 }
 
 
@@ -51,6 +60,10 @@
   grid-template-columns: auto 3.5em;
   gap: var(--gap-between-length-and-price);
   justify-content: flex-end;
+
+  @media (max-width: 350px) {
+    grid-template-columns: 1fr auto;
+  }
 }
 
 .price-container {
