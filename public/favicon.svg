@@ -1,3 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="2.3333 2.3333 19.3333 19.3333" fill="none" stroke="#ffffff" stroke-width="1.3333333333333333" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-icon lucide-square">
-  <rect width="18" height="18" x="3" y="3" rx="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="2.3333 2.3333 19.3333 19.3333">
+  <style>
+    rect { stroke: #000000;} 
+    @media (prefers-color-scheme: dark) {
+      rect { stroke: #ffffff; }
+    }
+  </style>
+  <rect width="18" height="18" x="3" y="3" rx="2" fill="none" stroke-width="1.3333" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
