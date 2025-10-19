@@ -60,6 +60,7 @@ import { siTelegram, siWhatsapp } from "simple-icons";
     justify-content: center;
     width: 100%;
     padding: 2rem var(--padding-horizontal);
+    padding-bottom: 4rem;
   }
 
   .book-an-appointment-container {
@@ -87,6 +88,7 @@ import { siTelegram, siWhatsapp } from "simple-icons";
     display: flex;
     align-items: center;
     gap: 0.33rem;
+    white-space: nowrap;
 
     & .phone-icon {
       width: 2.4rem;
@@ -115,6 +117,37 @@ import { siTelegram, siWhatsapp } from "simple-icons";
 
     &:hover {
       opacity: 0.7;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .book-an-appointment-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .contact-link-with-number {
+      & .phone-icon {
+        width: 1.85rem;
+        height: 1.85rem;
+      }
+
+      & .phone-number {
+        font-size: 2rem;
+      }
+    }
+
+    .contact-link {
+      & .messenger-icon {
+        width: 2rem;
+        height: 2rem;
+      }
     }
   }
 </style>
