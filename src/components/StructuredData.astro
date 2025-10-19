@@ -1,0 +1,153 @@
+---
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  name: "Одно Кресло",
+  description: "Стрижка и окрашивание волос в Москве. Студия на Новом Арбате.",
+  url: "https://odnokreslo.ru",
+  telephone: "+79175730053",
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Новый Арбат, 34с1",
+    addressLocality: "Москва",
+    addressCountry: "RU",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "55.753136",
+    longitude: "37.579055",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "13:00",
+      closes: "22:00",
+    },
+  ],
+  sameAs: ["https://t.me/kresloodno"],
+
+  amenityFeature: [
+    {
+      "@type": "LocationFeatureSpecification",
+      name: "Бесплатная парковка",
+      value: true,
+    },
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Услуги",
+    itemListElement: [
+      // haircut services
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Стрижка",
+          description: "Стрижка волос",
+        },
+        price: "3000",
+        priceCurrency: "RUB",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Стрижка чёлки",
+          description: "Стрижка чёлки",
+        },
+        price: "2000",
+        priceCurrency: "RUB",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Стрижка концов",
+          description: "Стрижка концов волос",
+        },
+        price: "2000",
+        priceCurrency: "RUB",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Стрижка бороды",
+          description: "Стрижка и оформление бороды",
+        },
+        price: "2000",
+        priceCurrency: "RUB",
+      },
+      // coloring services
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Окрашивание корней",
+          description: "Окрашивание корней волос",
+        },
+        price: "7000",
+        priceCurrency: "RUB",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Тонирование",
+          description: "Тонирование волос, цена зависит от длины",
+        },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          minPrice: "4000",
+          maxPrice: "5000",
+          priceCurrency: "RUB",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Тотал блонд",
+          description: "Полное осветление волос, цена зависит от длины",
+        },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          minPrice: "10000",
+          maxPrice: "20000",
+          priceCurrency: "RUB",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Air Touch",
+          description: "Техника окрашивания Air Touch, цена зависит от длины",
+        },
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          minPrice: "20000",
+          maxPrice: "25000",
+          priceCurrency: "RUB",
+        },
+      },
+    ],
+  },
+};
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(structuredData)}
+/>

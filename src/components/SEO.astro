@@ -1,0 +1,36 @@
+---
+const title = "ОДНО КРЕСЛО — стрижка и окрашивание";
+const description =
+  "ОДНО КРЕСЛО — стрижка и окрашивание волос в Москве. Студия на Новом Арбате. Записаться по телефону +7 917 573-00-53 или через мессенджеры.";
+const canonical = "https://odnokreslo.ru";
+const ogImage = "https://odnokreslo.ru/og-image.jpg";
+const siteName = "ОДНО КРЕСЛО";
+---
+
+<!-- seo meta tags -->
+<meta name="description" content={description} />
+<meta name="yandex-verification" content="991a1622ff9eda07" />
+<title>{title}</title>
+
+<!-- canonical URL -->
+<link rel="canonical" href={canonical} />
+
+<!-- open graph / facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="ru_RU" />
+
+<!-- twitter card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<meta name="theme-color" content="#ffffff" />

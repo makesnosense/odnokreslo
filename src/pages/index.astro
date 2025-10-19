@@ -5,19 +5,17 @@ import ServicesHaircuts from "../components/services/ServicesHaircuts.astro";
 import ServicesColoring from "../components/services/ServicesColoring.astro";
 import Location from "../components/Location.astro";
 import Appointment from "../components/Appointment.astro";
+import SEO from "../components/SEO.astro";
+import StructuredData from "../components/StructuredData.astro";
 ---
 
 <html lang="ru">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="yandex-verification" content="991a1622ff9eda07" />
-		<meta
-			name="description"
-			content="Одно Кресло — стрижка и окрашивание волос в Москве. Студия на Новом Арбате."
-		/>
-		<title>ОДНО КРЕСЛО — стрижка и окрашивание</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<SEO />
+		<StructuredData />
 
 		<script is:inline>
 			document.documentElement.style.setProperty(
