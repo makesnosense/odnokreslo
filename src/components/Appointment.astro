@@ -4,99 +4,113 @@ import { siTelegram, siWhatsapp } from "simple-icons";
 
 <section class="book-an-appointment-section">
   <div class="book-an-appointment-container">
-    <h2>Запись:</h2>
-    <div class="contacts-links-list">
-      <a href="tel:+79175730053" class="contact-link">
-        <svg
-          class="phone-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-phone-icon lucide-phone"
-          ><path
-            d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"
-          ></path></svg
-        >+7 917 573-00-53
-      </a>
-      <a
-        href="https://t.me/kresloodno"
-        class="contact-link"
-        aria-label="записаться через Telegram"
+    <h2 class="section-title">Запись:</h2>
+    <a href="tel:+79175730053" class="contact-link-with-number">
+      <svg
+        class="phone-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><path
+          d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h 3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"
+        ></path>
+      </svg><span class="phone-number">+7 917 573-00-53</span>
+    </a>
+    <a
+      href="https://t.me/kresloodno"
+      class="contact-link"
+      aria-label="записаться через Telegram"
+    >
+      <svg
+        class="messenger-icon"
+        role="img"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          class="messenger-icon"
-          role="img"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d={siTelegram.path}></path>
-        </svg>
-      </a>
+        <path d={siTelegram.path}></path>
+      </svg>
+    </a>
 
-      <a
-        href="https://wa.me/message/SJSNIMWPB2UOJ1"
-        class="contact-link"
-        aria-label="записаться через WhatsApp"
+    <a
+      href="https://wa.me/message/SJSNIMWPB2UOJ1"
+      class="contact-link"
+      aria-label="записаться через WhatsApp"
+    >
+      <svg
+        class="messenger-icon"
+        role="img"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          class="messenger-icon"
-          role="img"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d={siWhatsapp.path}></path>
-        </svg>
-      </a>
-    </div>
+        <path d={siWhatsapp.path}></path>
+      </svg>
+    </a>
   </div>
 </section>
 
 <style>
   .book-an-appointment-section {
-    display: grid;
-    place-items: center;
-
+    display: flex;
+    justify-content: center;
     width: 100%;
     padding: 2rem var(--padding-horizontal);
   }
 
   .book-an-appointment-container {
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 2rem;
-    max-width: 600px;
+    grid-template-columns: 1fr auto 1fr;
+    row-gap: 2.5rem;
+    column-gap: 2rem;
+    align-items: center;
+
+    & svg {
+      display: block;
+      overflow: visible;
+    }
   }
 
-  .contacts-links-list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2.5rem;
+  .section-title {
+    font-size: 2.5rem;
+    text-align: right;
   }
 
-  .contact-link {
+  .contact-link-with-number {
+    grid-column: 2 / 4;
     color: inherit;
     text-decoration: none;
     display: flex;
-    justify-content: center;
-    gap: 0.2rem;
+    align-items: center;
+    gap: 0.33rem;
+
+    & .phone-icon {
+      width: 2.4rem;
+      height: 2.4rem;
+      transform: translateY(1px);
+    }
+
+    & .phone-number {
+      font-size: 2.5rem;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .contact-link {
+    grid-column: 2;
+    color: inherit;
+    text-decoration: none;
 
     & .messenger-icon {
       width: 2.5rem;
       height: 2.5rem;
-    }
-
-    & .phone-icon {
-      height: 0.89rem;
-      width: 0.89rem;
-      /* transform: translateY(0.25px); */
-      align-self: center;
     }
 
     &:hover {
