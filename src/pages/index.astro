@@ -18,6 +18,13 @@ import Appointment from "../components/Appointment.astro";
 			content="Одно Кресло — стрижка и окрашивание волос в Москве. Студия на Новом Арбате."
 		/>
 		<title>ОДНО КРЕСЛО — стрижка и окрашивание</title>
+
+		<script is:inline>
+			document.documentElement.style.setProperty(
+				"--viewport-height",
+				`${window.innerHeight}px`,
+			);
+		</script>
 	</head>
 	<body>
 		<Hero />
@@ -47,7 +54,7 @@ import Appointment from "../components/Appointment.astro";
 	}
 
 	body {
-		min-height: 100vh;
+		min-height: 100dvh;
 		overflow-x: hidden;
 		background: white;
 		color: black;
