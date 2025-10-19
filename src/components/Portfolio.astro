@@ -41,7 +41,7 @@ const portfolioPhotos: readonly PortfolioPhoto[] = [
             alt={photo.alt}
             widths={[300, 400, 600]}
             sizes="(max-width: 768px) 33vw, (max-width: 1200px) 25vw, (max-width: 1600px) 20vw, 16vw"
-            loading={index < 6 ? "eager" : "lazy"}
+            loading="lazy"
           />
         </div>
       ))
