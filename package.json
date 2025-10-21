@@ -12,5 +12,8 @@
     "@astrojs/sitemap": "^3.6.0",
     "astro": "^5.14.4",
     "simple-icons": "^15.16.1"
+  },
+  "devDependencies": {
+    "@yandex/ymaps3-types": "^1.0.17798529"
   }
 }

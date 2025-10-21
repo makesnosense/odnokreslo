@@ -6,12 +6,38 @@
     <p>Бесплатная парковка на территории</p>
   </div>
   <div class="map-container">
-    <iframe
-      src="https://yandex.ru/map-widget/v1/?um=constructor%3A34fc59bcd1ab3427786faff1648aee9a1e69e8a3e653e7bf8f43ccc7474dc174&source=constructor"
-      title="расположение студии на яндекс картах"
-      loading="lazy"></iframe>
+    <div class="map"></div>
   </div>
 </section>
+
+<script
+  is:inline
+  src="https://api-maps.yandex.ru/v3/?apikey=d03e0055-6f9f-4639-8d4d-a43b12acccc3&lang=ru_RU"
+></script>
+
+<script>
+  import type { YMapLocationRequest } from "@yandex/ymaps3-types";
+
+  const LOCATION: YMapLocationRequest = {
+    center: [37.579055, 55.753136],
+    zoom: 15,
+  };
+
+  await ymaps3.ready;
+
+  const { YMap, YMapDefaultSchemeLayer } = ymaps3;
+
+  const mapElement = document.querySelector<HTMLElement>(
+    ".location-section .map",
+  );
+  if (!mapElement) {
+    throw new Error("Map container not found");
+  }
+
+  const map = new YMap(mapElement, { location: LOCATION });
+
+  map.addChild(new YMapDefaultSchemeLayer({}));
+</script>
 
 <style>
   .location-section {
@@ -32,11 +58,12 @@
     width: 100%;
     height: 320px;
     padding: 0;
-    iframe {
+
+    & .map {
       width: 100%;
       height: 100%;
-      filter: grayscale(100%) contrast(1.2) brightness(0.95);
       border: solid 1px rgba(0, 0, 0, 0.3);
+      filter: grayscale(100%) contrast(1.2) brightness(0.95);
     }
   }
 </style>
