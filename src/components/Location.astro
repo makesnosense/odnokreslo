@@ -7,36 +7,155 @@
   </div>
   <div class="map-container">
     <div class="map"></div>
+    <div class="map-overlay" style="display: none;">
+      <span>Используйте два пальца для перемещения карты</span>
+    </div>
   </div>
 </section>
 
 <script
   is:inline
+  async
   src="https://api-maps.yandex.ru/v3/?apikey=d03e0055-6f9f-4639-8d4d-a43b12acccc3&lang=ru_RU"
 ></script>
 
 <script>
-  import type { YMapLocationRequest } from "@yandex/ymaps3-types";
+  import type { YMapLocationRequest, BehaviorType } from "@yandex/ymaps3-types";
+  import "@yandex/ymaps3-default-ui-theme/dist/esm/index.css";
+
+  declare global {
+    interface Window {
+      ymaps3: typeof ymaps3;
+    }
+  }
+
+  const loadYmaps3 = (): Promise<void> => {
+    return new Promise((resolve) => {
+      const checkYmapsLoaded = () => {
+        if (window.ymaps3) {
+          ymaps3.ready.then(resolve);
+        } else {
+          setTimeout(checkYmapsLoaded, 50);
+        }
+      };
+      checkYmapsLoaded();
+    });
+  };
+
+  await loadYmaps3();
+
+  const { YMap, YMapDefaultSchemeLayer, YMapControls } = ymaps3;
+
+  const { YMapZoomControl } = await import("@yandex/ymaps3-default-ui-theme");
+
+  const mapElement = document.querySelector<HTMLElement>(
+    ".location-section .map",
+  );
+  const overlayElement = document.querySelector<HTMLElement>(
+    ".location-section .map-overlay",
+  );
+
+  if (!mapElement) {
+    throw new Error("Map element not found");
+  }
+  if (!overlayElement) {
+    throw new Error("Map overlay element not found");
+  }
 
   const LOCATION: YMapLocationRequest = {
     center: [37.579055, 55.753136],
     zoom: 15,
   };
 
-  await ymaps3.ready;
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-  const { YMap, YMapDefaultSchemeLayer } = ymaps3;
+  const behaviors: BehaviorType[] = isTouchDevice ? [] : ["drag"];
 
-  const mapElement = document.querySelector<HTMLElement>(
-    ".location-section .map",
+  const map = new YMap(
+    mapElement,
+    {
+      location: LOCATION,
+      behaviors: behaviors,
+    },
+    [new YMapDefaultSchemeLayer({})],
   );
-  if (!mapElement) {
-    throw new Error("Map container not found");
+  const controls = new YMapControls({ position: "right" });
+  controls.addChild(new YMapZoomControl({ easing: "ease-in-out" }));
+  map.addChild(controls);
+
+  // overlay logic for mobile
+  if (isTouchDevice) {
+    // DON'T lock map initially - let it receive all touch events
+    // mapElement.style.pointerEvents = "none"; // REMOVE THIS
+
+    let hideOverlayTimeout: number | null = null;
+    let showOverlayTimeout: number | null = null;
+    let touchStartTime: number = 0;
+
+    const showOverlay = () => {
+      overlayElement.style.display = "flex";
+      setTimeout(() => {
+        overlayElement.style.opacity = "1";
+      }, 10);
+    };
+
+    const hideOverlay = () => {
+      overlayElement.style.opacity = "0";
+      setTimeout(() => {
+        if (overlayElement.style.opacity === "0") {
+          overlayElement.style.display = "none";
+        }
+      }, 300);
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      const touchCount = e.touches.length;
+
+      if (touchCount === 1) {
+        // single finger: prevent map interaction, allow page scroll
+        // e.preventDefault();
+        // e.stopPropagation();
+
+        touchStartTime = Date.now();
+        map.setBehaviors(["pinchZoom"]);
+
+        if (showOverlayTimeout) window.clearTimeout(showOverlayTimeout);
+        showOverlayTimeout = window.setTimeout(() => {
+          showOverlay();
+
+          if (hideOverlayTimeout) window.clearTimeout(hideOverlayTimeout);
+          hideOverlayTimeout = window.setTimeout(() => {
+            hideOverlay();
+          }, 1000);
+        }, 150);
+      } else if (touchCount >= 2) {
+        // two fingers: enable map interaction (don't prevent default here!)
+        // e.preventDefault(); // DON'T prevent - let map handle it
+        if (showOverlayTimeout) window.clearTimeout(showOverlayTimeout);
+        if (hideOverlayTimeout) window.clearTimeout(hideOverlayTimeout);
+        hideOverlay();
+        map.setBehaviors(["drag", "pinchZoom"]);
+      }
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      const touchDuration = Date.now() - touchStartTime;
+      if (touchDuration < 150) {
+        if (showOverlayTimeout) window.clearTimeout(showOverlayTimeout);
+      }
+    };
+
+    const mapContainer = document.querySelector<HTMLElement>(".map-container");
+    if (mapContainer) {
+      mapContainer.addEventListener("touchstart", handleTouchStart, {
+        passive: true,
+      });
+      mapContainer.addEventListener("touchend", handleTouchEnd);
+    }
+  } else {
+    overlayElement.style.display = "none";
   }
-
-  const map = new YMap(mapElement, { location: LOCATION });
-
-  map.addChild(new YMapDefaultSchemeLayer({}));
 </script>
 
 <style>
@@ -58,12 +177,46 @@
     width: 100%;
     height: 320px;
     padding: 0;
+    position: relative;
 
     & .map {
       width: 100%;
       height: 100%;
       border: solid 1px rgba(0, 0, 0, 0.3);
       filter: grayscale(100%) contrast(1.2) brightness(0.95);
+      cursor: grab;
+      touch-action: pan-y; /* allow vertical scroll, prevent horizontal pan and pinch */
+      /* pointer-events: none; */
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+
+    & .map-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      backdrop-filter: blur(2px);
+      touch-action: pan-y;
+      pointer-events: none; /* allows scrolling through overlay */
+      transition: opacity 0.25s ease;
+
+      & span {
+        /* background: white; */
+        padding: 1rem 2rem;
+        /* border: 1px solid rgba(0, 0, 0, 0.3); */
+        border-radius: 4px;
+        /* font-size: 0.9rem; */
+        /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+      }
     }
   }
 </style>
