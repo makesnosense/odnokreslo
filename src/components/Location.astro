@@ -66,6 +66,13 @@ import MapToggleButton from "./MapToggleButton.astro";
     throw new Error("Not all of the map elements are present");
   }
 
+  const toggleButtonAnimations =
+    toggleBtn.querySelectorAll<SVGAnimateElement>(".colored-animation");
+
+  if (!toggleButtonAnimations) {
+    throw new Error("Toggle button animation elements is not found");
+  }
+
   const LOCATION: YMapLocationRequest = {
     center: [37.579055, 55.753136],
     zoom: 15,
@@ -104,18 +111,22 @@ import MapToggleButton from "./MapToggleButton.astro";
       mapHint.classList.add("visible");
       mapElement.classList.add("blurred");
 
+      toggleButtonAnimations.forEach((animation) => animation.beginElement());
+
       if (hintTimeout) {
         clearTimeout(hintTimeout);
       }
       hintTimeout = window.setTimeout(() => {
         mapHint.classList.remove("visible");
         mapElement.classList.remove("blurred");
+        toggleButtonAnimations.forEach((animation) => animation.endElement());
       }, 2000);
     };
 
     const hideHint = () => {
       mapHint.classList.remove("visible");
       mapElement.classList.remove("blurred");
+      toggleButtonAnimations.forEach((animation) => animation.endElement());
       if (hintTimeout) {
         clearTimeout(hintTimeout);
         hintTimeout = null;
@@ -194,7 +205,7 @@ import MapToggleButton from "./MapToggleButton.astro";
       }
 
       &.blurred {
-        --map-blur: blur(2px);
+        --map-blur: blur(1.5px) brightness(0.95);
       }
 
       &.grayscale {
