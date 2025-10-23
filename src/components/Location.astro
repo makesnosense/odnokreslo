@@ -102,16 +102,21 @@
 
       if (touchCount === 1) {
         // single finger: show overlay and schedule hide
-        map.setBehaviors(["pinchZoom"]);
+        map.setBehaviors([]);
         showOverlay();
 
-        if (hideOverlayTimeout) window.clearTimeout(hideOverlayTimeout);
+        if (hideOverlayTimeout) {
+          window.clearTimeout(hideOverlayTimeout);
+        }
+
         hideOverlayTimeout = window.setTimeout(() => {
           hideOverlay();
         }, 1000);
       } else if (touchCount >= 2) {
         // two fingers: hide overlay and enable map interaction
-        if (hideOverlayTimeout) window.clearTimeout(hideOverlayTimeout);
+        if (hideOverlayTimeout) {
+          window.clearTimeout(hideOverlayTimeout);
+        }
         hideOverlay();
         map.setBehaviors(["drag", "pinchZoom"]);
       }
