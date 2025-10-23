@@ -48,6 +48,9 @@
 
   const { YMapZoomControl } = await import("@yandex/ymaps3-default-ui-theme");
 
+  const mapContainer = document.querySelector<HTMLElement>(
+    ".location-section .map-container",
+  );
   const mapElement = document.querySelector<HTMLElement>(
     ".location-section .map",
   );
@@ -55,11 +58,8 @@
     ".location-section .map-overlay",
   );
 
-  if (!mapElement) {
-    throw new Error("Map element not found");
-  }
-  if (!overlayElement) {
-    throw new Error("Map overlay element not found");
+  if (!mapContainer || !mapElement || !overlayElement) {
+    throw new Error("Not all needed map elements are present");
   }
 
   const LOCATION: YMapLocationRequest = {
@@ -70,91 +70,56 @@
   const isTouchDevice =
     "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-  const behaviors: BehaviorType[] = isTouchDevice ? [] : ["drag"];
-
   const map = new YMap(
     mapElement,
     {
       location: LOCATION,
-      behaviors: behaviors,
+      behaviors: isTouchDevice ? [] : ["drag"],
     },
     [new YMapDefaultSchemeLayer({})],
   );
+
   const controls = new YMapControls({ position: "right" });
   controls.addChild(new YMapZoomControl({ easing: "ease-in-out" }));
   map.addChild(controls);
-
   // overlay logic for mobile
-  if (isTouchDevice) {
-    // DON'T lock map initially - let it receive all touch events
-    // mapElement.style.pointerEvents = "none"; // REMOVE THIS
 
+  if (!isTouchDevice) {
+    overlayElement.style.display = "none";
+  } else {
     let hideOverlayTimeout: number | null = null;
-    let showOverlayTimeout: number | null = null;
-    let touchStartTime: number = 0;
 
     const showOverlay = () => {
       overlayElement.style.display = "flex";
-      setTimeout(() => {
-        overlayElement.style.opacity = "1";
-      }, 10);
     };
 
     const hideOverlay = () => {
-      overlayElement.style.opacity = "0";
-      setTimeout(() => {
-        if (overlayElement.style.opacity === "0") {
-          overlayElement.style.display = "none";
-        }
-      }, 300);
+      overlayElement.style.display = "none";
     };
 
     const handleTouchStart = (e: TouchEvent) => {
       const touchCount = e.touches.length;
 
       if (touchCount === 1) {
-        // single finger: prevent map interaction, allow page scroll
-        // e.preventDefault();
-        // e.stopPropagation();
-
-        touchStartTime = Date.now();
+        // single finger: show overlay and schedule hide
         map.setBehaviors(["pinchZoom"]);
+        showOverlay();
 
-        if (showOverlayTimeout) window.clearTimeout(showOverlayTimeout);
-        showOverlayTimeout = window.setTimeout(() => {
-          showOverlay();
-
-          if (hideOverlayTimeout) window.clearTimeout(hideOverlayTimeout);
-          hideOverlayTimeout = window.setTimeout(() => {
-            hideOverlay();
-          }, 1000);
-        }, 150);
+        if (hideOverlayTimeout) window.clearTimeout(hideOverlayTimeout);
+        hideOverlayTimeout = window.setTimeout(() => {
+          hideOverlay();
+        }, 1000);
       } else if (touchCount >= 2) {
-        // two fingers: enable map interaction (don't prevent default here!)
-        // e.preventDefault(); // DON'T prevent - let map handle it
-        if (showOverlayTimeout) window.clearTimeout(showOverlayTimeout);
+        // two fingers: hide overlay and enable map interaction
         if (hideOverlayTimeout) window.clearTimeout(hideOverlayTimeout);
         hideOverlay();
         map.setBehaviors(["drag", "pinchZoom"]);
       }
     };
 
-    const handleTouchEnd = (e: TouchEvent) => {
-      const touchDuration = Date.now() - touchStartTime;
-      if (touchDuration < 150) {
-        if (showOverlayTimeout) window.clearTimeout(showOverlayTimeout);
-      }
-    };
-
-    const mapContainer = document.querySelector<HTMLElement>(".map-container");
-    if (mapContainer) {
-      mapContainer.addEventListener("touchstart", handleTouchStart, {
-        passive: true,
-      });
-      mapContainer.addEventListener("touchend", handleTouchEnd);
-    }
-  } else {
-    overlayElement.style.display = "none";
+    mapContainer.addEventListener("touchstart", handleTouchStart, {
+      passive: true,
+    });
   }
 </script>
 
@@ -185,8 +150,7 @@
       border: solid 1px rgba(0, 0, 0, 0.3);
       filter: grayscale(100%) contrast(1.2) brightness(0.95);
       cursor: grab;
-      touch-action: pan-y; /* allow vertical scroll, prevent horizontal pan and pinch */
-      /* pointer-events: none; */
+      touch-action: pan-y;
 
       &:active {
         cursor: grabbing;
@@ -206,16 +170,11 @@
       z-index: 10;
       backdrop-filter: blur(2px);
       touch-action: pan-y;
-      pointer-events: none; /* allows scrolling through overlay */
-      transition: opacity 0.25s ease;
+      pointer-events: none;
 
       & span {
-        /* background: white; */
         padding: 1rem 2rem;
-        /* border: 1px solid rgba(0, 0, 0, 0.3); */
         border-radius: 4px;
-        /* font-size: 0.9rem; */
-        /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
       }
     }
   }
