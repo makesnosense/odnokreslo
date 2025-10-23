@@ -58,9 +58,12 @@ import MapToggleButton from "./MapToggleButton.astro";
   const toggleBtn = document.querySelector<HTMLButtonElement>(
     ".location-section .map-toggle-btn",
   );
+  const mapHint = document.querySelector<HTMLElement>(
+    ".location-section .map-hint",
+  );
 
-  if (!mapContainer || !mapElement || !toggleBtn) {
-    throw new Error("Not all needed map elements are present");
+  if (!mapContainer || !mapElement || !toggleBtn || !mapHint) {
+    throw new Error("Not all of the map elements are present");
   }
 
   const LOCATION: YMapLocationRequest = {
@@ -92,12 +95,41 @@ import MapToggleButton from "./MapToggleButton.astro";
   // toggle logic for mobile
   if (isTouchDevice) {
     let isMapActive = false;
+    let hintTimeout: number | null = null;
 
     // initially, map doesn't intercept touches
     mapElement.style.pointerEvents = "none";
 
+    const showHint = () => {
+      mapHint.classList.add("visible");
+
+      // auto-hide after 2 seconds
+      if (hintTimeout) clearTimeout(hintTimeout);
+      hintTimeout = window.setTimeout(() => {
+        mapHint.classList.remove("visible");
+      }, 2000);
+    };
+
+    const hideHint = () => {
+      mapHint.classList.remove("visible");
+      if (hintTimeout) {
+        clearTimeout(hintTimeout);
+        hintTimeout = null;
+      }
+    };
+
+    mapContainer.addEventListener("touchstart", (event) => {
+      if (!isMapActive) {
+        const target = event.target as HTMLElement;
+        if (!target.closest("button")) {
+          showHint();
+        }
+      }
+    });
+
     const toggleMapInteraction = () => {
       isMapActive = !isMapActive;
+      hideHint();
 
       if (isMapActive) {
         // enable map interaction, disable page scroll
