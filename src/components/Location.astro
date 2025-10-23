@@ -46,8 +46,15 @@ import MapToggleButton from "./MapToggleButton.astro";
 
   await loadYmaps3();
 
-  const { YMap, YMapDefaultSchemeLayer, YMapControls } = ymaps3;
-  const { YMapZoomControl } = await import("@yandex/ymaps3-default-ui-theme");
+  const {
+    YMap,
+    YMapDefaultSchemeLayer,
+    YMapControls,
+    YMapDefaultFeaturesLayer,
+  } = ymaps3;
+  const { YMapZoomControl, YMapDefaultMarker } = await import(
+    "@yandex/ymaps3-default-ui-theme"
+  );
 
   const mapContainer = document.querySelector<HTMLElement>(
     ".location-section .map-container",
@@ -73,9 +80,9 @@ import MapToggleButton from "./MapToggleButton.astro";
     throw new Error("Toggle button animation elements is not found");
   }
 
-  const LOCATION: YMapLocationRequest = {
-    center: [37.579055, 55.753136],
-    zoom: 15,
+  const MAP_CENTER: YMapLocationRequest = {
+    center: [37.584, 55.7542],
+    zoom: 14,
   };
 
   const isTouchDevice =
@@ -89,15 +96,34 @@ import MapToggleButton from "./MapToggleButton.astro";
   const map = new YMap(
     mapElement,
     {
-      location: LOCATION,
+      location: MAP_CENTER,
+      copyrightsPosition: "bottom right",
       behaviors: isTouchDevice ? [] : ["drag"],
     },
-    [new YMapDefaultSchemeLayer({})],
+    [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})],
   );
 
   const controls = new YMapControls({ position: "right" });
   controls.addChild(new YMapZoomControl({ easing: "ease-in-out" }));
   map.addChild(controls);
+
+  const salonMarker = new YMapDefaultMarker({
+    coordinates: [37.579055, 55.753136],
+    iconName: "hairdressers",
+    title: "ОДНО КРЕСЛО",
+    subtitle: "Новый Арбат, 34с1",
+    color: "silver",
+    size: "normal",
+    onClick: () => {
+      window.open(
+        "https://yandex.ru/maps/-/CLbwQ87U",
+        "_blank",
+        "noopener,noreferrer",
+      );
+    },
+  });
+
+  map.addChild(salonMarker);
 
   // toggle logic for mobile
   if (isTouchDevice) {
