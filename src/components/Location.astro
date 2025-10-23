@@ -102,16 +102,20 @@ import MapToggleButton from "./MapToggleButton.astro";
 
     const showHint = () => {
       mapHint.classList.add("visible");
+      mapElement.classList.add("blurred");
 
-      // auto-hide after 2 seconds
-      if (hintTimeout) clearTimeout(hintTimeout);
+      if (hintTimeout) {
+        clearTimeout(hintTimeout);
+      }
       hintTimeout = window.setTimeout(() => {
         mapHint.classList.remove("visible");
+        mapElement.classList.remove("blurred");
       }, 2000);
     };
 
     const hideHint = () => {
       mapHint.classList.remove("visible");
+      mapElement.classList.remove("blurred");
       if (hintTimeout) {
         clearTimeout(hintTimeout);
         hintTimeout = null;
@@ -181,6 +185,10 @@ import MapToggleButton from "./MapToggleButton.astro";
       cursor: grab;
       &:active {
         cursor: grabbing;
+      }
+
+      &.blurred {
+        filter: blur(2px) brightness(0.95);
       }
     }
   }
