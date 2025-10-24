@@ -1,4 +1,5 @@
 ---
+import OpenInMapsButton from "./OpenInMapsButton.astro";
 import MapToggleButton from "./MapToggleButton.astro";
 ---
 
@@ -10,30 +11,8 @@ import MapToggleButton from "./MapToggleButton.astro";
     <p>Бесплатная парковка на территории</p>
   </div>
   <div class="map-container">
-    <div class="map grayscale">
-      <a
-        href="https://yandex.ru/maps/-/CLbwQ87U"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="yandex-open-maps-btn"
-        aria-label="Открыть в Яндекс Картах"
-      >
-        <svg
-          class="btn-icon-mobile"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <path
-            d="M12 1a9.002 9.002 0 0 0-6.366 15.362c1.63 1.63 5.466 3.988 5.693 6.465.034.37.303.673.673.673.37 0 .64-.303.673-.673.227-2.477 4.06-4.831 5.689-6.46A9.002 9.002 0 0 0 12 1zm0 12.079a3.079 3.079 0 1 1 0-6.158 3.079 3.079 0 0 1 0 6.158z"
-            fill="#F43"></path>
-        </svg>
-        <span class="btn-text-full">Открыть в Яндекс Картах</span>
-        <span class="btn-text-short">Открыть в Картах</span>
-      </a>
-    </div>
+    <div class="map grayscale"></div>
+    <OpenInMapsButton />
     <MapToggleButton />
   </div>
 </section>
@@ -91,8 +70,11 @@ import MapToggleButton from "./MapToggleButton.astro";
   const mapHint = document.querySelector<HTMLElement>(
     ".location-section .map-hint",
   );
+  const openMapsBtn = document.querySelector<HTMLElement>(
+    ".yandex-open-maps-btn",
+  );
 
-  if (!mapContainer || !mapElement || !toggleBtn || !mapHint) {
+  if (!mapContainer || !mapElement || !toggleBtn || !mapHint || !openMapsBtn) {
     throw new Error("Not all of the map elements are present");
   }
 
@@ -200,7 +182,9 @@ import MapToggleButton from "./MapToggleButton.astro";
         map.setBehaviors(["drag", "pinchZoom"]);
         mapElement.style.pointerEvents = "auto";
         mapElement.style.touchAction = "none";
+
         mapElement.classList.remove("grayscale");
+        openMapsBtn.classList.remove("grayscale");
         toggleBtn.classList.add("enabled");
       } else {
         // disable map interaction, enable page scroll
@@ -208,6 +192,7 @@ import MapToggleButton from "./MapToggleButton.astro";
         mapElement.style.pointerEvents = "none";
         mapElement.style.touchAction = "auto";
         mapElement.classList.add("grayscale");
+        openMapsBtn.classList.add("grayscale");
         toggleBtn.classList.remove("enabled");
       }
     };
@@ -259,87 +244,6 @@ import MapToggleButton from "./MapToggleButton.astro";
 
       &.grayscale {
         --map-desaturate: grayscale(100%);
-      }
-    }
-  }
-
-  .yandex-open-maps-btn {
-    position: absolute;
-    bottom: 0.8rem;
-    left: 0.8rem;
-    z-index: 10;
-    text-transform: none;
-    display: inline-flex;
-    align-items: center;
-
-    height: 31px;
-    padding: 8px;
-    background: #fffefe;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px 0 #0003;
-
-    font-size: 0.75rem;
-    color: #3c3c3c;
-    text-decoration: none;
-    white-space: nowrap;
-
-    transition: all 0.15s ease;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-
-    &::before {
-      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIj48cGF0aCBkPSJNMTIgMWE5LjAwMiA5LjAwMiAwIDAgMC02LjM2NiAxNS4zNjJjMS42MyAxLjYzIDUuNDY2IDMuOTg4IDUuNjkzIDYuNDY1LjAzNC4zNy4zMDMuNjczLjY3My42NzMuMzcgMCAuNjQtLjMwMy42NzMtLjY3My4yMjctMi40NzcgNC4wNi00LjgzMSA1LjY4OS02LjQ2QTkuMDAyIDkuMDAyIDAgMCAwIDEyIDF6bTAgMTIuMDc5YTMuMDc5IDMuMDc5IDAgMSAxIDAtNi4xNTggMy4wNzkgMy4wNzkgMCAwIDEgMCA2LjE1OHoiIGZpbGw9IiNGNDMiLz48L3N2Zz4=");
-
-      background-size: 14px 14px;
-      content: "";
-      display: inline-block;
-      height: 14px;
-      margin-right: 6px;
-      width: 14px;
-    }
-
-    & .btn-icon-mobile {
-      display: none;
-    }
-
-    & .btn-text-short {
-      display: none;
-    }
-
-    &:hover {
-      color: black;
-      background-color: white;
-      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
-    }
-
-    @media (max-width: 768px) {
-      & .btn-text-full {
-        display: none;
-      }
-
-      & .btn-text-short {
-        display: inline;
-      }
-    }
-
-    @media (max-width: 460px) {
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      justify-content: center;
-
-      &::before {
-        display: none;
-      }
-
-      & .btn-icon-mobile {
-        display: block;
-        width: 24px;
-        height: 24px;
-      }
-
-      & .btn-text-short {
-        display: none;
       }
     }
   }
