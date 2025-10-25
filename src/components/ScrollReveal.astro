@@ -1,0 +1,54 @@
+<script>
+  const observerOptions = {
+    threshold: 0.1, // trigger when 10% visible
+    rootMargin: "0px 0px -50px 0px", // trigger slightly before fully visible
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+        observer.unobserve(entry.target); // stop observing once revealed
+      }
+    });
+  }, observerOptions);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // reveal all sections except hero and location
+    const sections = document.querySelectorAll(
+      "section:not(.hero):not(.location-section)",
+    );
+    sections.forEach((section) => {
+      section.classList.add("to-reveal");
+      observer.observe(section);
+    });
+
+    // separately reveal just the address in location section
+    const address = document.querySelector(".location-section .address");
+    if (address) {
+      address.classList.add("to-reveal");
+      observer.observe(address);
+    }
+  });
+</script>
+
+<style is:global>
+  .to-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .to-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* hero should always be visible */
+  .hero {
+    opacity: 1;
+    transform: none;
+  }
+</style>
