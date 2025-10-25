@@ -1,8 +1,8 @@
-# ОДНО КРЕСЛО
+# odnokreslo
 
 **Live:** https://odnokreslo.ru
 
-A minimalistic hair salon website with responsive design and interactive map. 
+Hair studio website with responsive design and interactive map.
 
 <img src="./screenshots/portfolio-grid.png" width="600" alt="Portfolio grid">
 
