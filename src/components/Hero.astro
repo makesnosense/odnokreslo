@@ -2,7 +2,46 @@
   <p>Вадим Дорохин</p>
   <h1>Одно Кресло</h1>
   <h2>стрижка и окрашивание</h2>
+
+  <svg
+    class="scroll-indicator"
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="0.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    ><path d="M8 18L12 22L16 18"></path><path d="M12 2V22"></path></svg
+  >
 </section>
+
+<script>
+  let isScrolled = false;
+  const indicator = document.querySelector<HTMLElement>(".scroll-indicator");
+  if (!indicator) {
+    throw Error("Indicator not found");
+  }
+
+  indicator.style.opacity = "0";
+  // fade in after delay
+  setTimeout(() => {
+    if (!isScrolled) {
+      indicator.style.opacity = "1";
+    }
+  }, 1000);
+
+  const handleScroll = () => {
+    if (!isScrolled && window.scrollY > 30) {
+      isScrolled = true;
+      indicator.style.opacity = "0";
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+</script>
 
 <style>
   .hero {
@@ -12,6 +51,7 @@
     justify-content: center;
     align-items: flex-start;
     padding: var(--padding-vertical) var(--padding-horizontal);
+    position: relative;
   }
 
   .hero h1,
@@ -19,5 +59,27 @@
   .hero p {
     line-height: 3.33;
     white-space: nowrap;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.35s ease-in-out;
+    opacity: 0;
+
+    pointer-events: none;
+    animation: bounce 3s ease-in-out 1.7s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(0.5rem);
+    }
   }
 </style>
