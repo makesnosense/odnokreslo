@@ -11,7 +11,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
     "@yandex/ymaps3-default-ui-theme": "^0.0.19",
-    "astro": "^5.14.4",
+    "astro": "^5.15.3",
     "simple-icons": "^15.16.1"
   },
   "devDependencies": {
