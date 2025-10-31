@@ -20,16 +20,23 @@
 
 <script>
   let isScrolled = false;
+  const indicator = document.querySelector<HTMLElement>(".scroll-indicator");
+  if (!indicator) {
+    throw Error("Indicator not found");
+  }
+
+  indicator.style.opacity = "0";
+  // fade in after delay
+  setTimeout(() => {
+    if (!isScrolled) {
+      indicator.style.opacity = "1";
+    }
+  }, 1000);
 
   const handleScroll = () => {
     if (!isScrolled && window.scrollY > 30) {
       isScrolled = true;
-      const indicator =
-        document.querySelector<HTMLElement>(".scroll-indicator");
-      if (!indicator) {
-        throw Error("Indicator not found");
-      }
-      indicator.classList.add("hidden");
+      indicator.style.opacity = "0";
     }
   };
 
@@ -59,18 +66,11 @@
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
+    transition: opacity 0.35s ease-in-out;
     opacity: 0;
 
-    animation:
-      fadeIn 0.6s ease-out 1.5s forwards,
-      bounce 3s ease-in-out 1.5s infinite;
-    transition: opacity 0.35s ease;
-  }
-
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
+    pointer-events: none;
+    animation: bounce 3s ease-in-out 1.7s infinite;
   }
 
   @keyframes bounce {
@@ -81,11 +81,5 @@
     50% {
       transform: translateX(-50%) translateY(0.5rem);
     }
-  }
-
-  .hidden {
-    /* the only way to reliably achieve smooth fade out*/
-    animation: none !important;
-    opacity: 0 !important;
   }
 </style>
