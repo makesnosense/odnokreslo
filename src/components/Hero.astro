@@ -2,7 +2,39 @@
   <p>Вадим Дорохин</p>
   <h1>Одно Кресло</h1>
   <h2>стрижка и окрашивание</h2>
+
+  <svg
+    class="scroll-indicator"
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="0.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    ><path d="M8 18L12 22L16 18"></path><path d="M12 2V22"></path></svg
+  >
 </section>
+
+<script>
+  let isScrolled = false;
+
+  const handleScroll = () => {
+    if (!isScrolled && window.scrollY > 30) {
+      isScrolled = true;
+      const indicator =
+        document.querySelector<HTMLElement>(".scroll-indicator");
+      if (!indicator) {
+        throw Error("Indicator not found");
+      }
+      indicator.classList.add("hidden");
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+</script>
 
 <style>
   .hero {
@@ -12,6 +44,7 @@
     justify-content: center;
     align-items: flex-start;
     padding: var(--padding-vertical) var(--padding-horizontal);
+    position: relative;
   }
 
   .hero h1,
@@ -19,5 +52,40 @@
   .hero p {
     line-height: 3.33;
     white-space: nowrap;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+
+    animation:
+      fadeIn 0.6s ease-out 1.5s forwards,
+      bounce 3s ease-in-out 1.5s infinite;
+    transition: opacity 0.35s ease;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(0.5rem);
+    }
+  }
+
+  .hidden {
+    /* the only way to reliably achieve smooth fade out*/
+    animation: none !important;
+    opacity: 0 !important;
   }
 </style>
