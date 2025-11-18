@@ -16,19 +16,12 @@
   document.addEventListener("DOMContentLoaded", () => {
     // reveal all sections except hero and location
     const sections = document.querySelectorAll(
-      "section:not(.hero):not(.location-section)",
+      "section:not(.hero):not(.location-section):not(.location-section)",
     );
     sections.forEach((section) => {
       section.classList.add("to-reveal");
       observer.observe(section);
     });
-
-    // separately reveal just the address in location section
-    const address = document.querySelector(".location-section .address");
-    if (address) {
-      address.classList.add("to-reveal");
-      observer.observe(address);
-    }
   });
 </script>
 
