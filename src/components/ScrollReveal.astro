@@ -14,9 +14,8 @@
   }, observerOptions);
 
   document.addEventListener("DOMContentLoaded", () => {
-    // reveal all sections except hero and location
     const sections = document.querySelectorAll(
-      "section:not(.hero):not(.location-section):not(.location-section)",
+      "section",
     );
     sections.forEach((section) => {
       section.classList.add("to-reveal");
@@ -28,20 +27,10 @@
 <style is:global>
   .to-reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition:
-      opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-      transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .to-reveal.revealed {
     opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* hero should always be visible */
-  .hero {
-    opacity: 1;
-    transform: none;
   }
 </style>
