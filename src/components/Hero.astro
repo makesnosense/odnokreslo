@@ -6,12 +6,10 @@
   <svg
     class="scroll-indicator"
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    stroke-width="0.5"
+    stroke-width="1"
     stroke-linecap="round"
     stroke-linejoin="round"
     ><path d="M8 18L12 22L16 18"></path><path d="M12 2V22"></path></svg
@@ -63,14 +61,16 @@
 
   .scroll-indicator {
     position: absolute;
-    bottom: 2rem;
+    width: clamp(1.75rem, 3.5vw, 2.5rem);
+    height: clamp(1.75rem, 3.5vw, 2.5rem);
+    bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
     transition: opacity 0.35s ease-in-out;
     opacity: 0;
 
     pointer-events: none;
-    animation: bounce 3s ease-in-out 1.7s infinite;
+    animation: bounce 2s ease-in-out 0.8s infinite;
   }
 
   @keyframes bounce {
@@ -79,7 +79,7 @@
       transform: translateX(-50%) translateY(0);
     }
     50% {
-      transform: translateX(-50%) translateY(0.5rem);
+      transform: translateX(-50%) translateY(1rem);
     }
   }
 </style>
