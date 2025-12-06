@@ -1,0 +1,49 @@
+---
+const navItems = [
+  { label: "Работы", href: "#portfolio" },
+  { label: "Услуги", href: "#services" },
+  { label: "Контакты", href: "#contacts" },
+];
+---
+
+<nav class="navigation">
+  {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+</nav>
+
+<style>
+  .navigation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 100;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 1.25rem var(--padding-horizontal);
+
+    @media (min-width: 640px) {
+      justify-content: unset;
+      gap: 3rem;
+    }
+  }
+
+  a {
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+
+    text-decoration: none;
+
+    border-bottom: 0.5px solid rgba(0, 0, 0);
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &:any-link {
+      color: inherit;
+    }
+  }
+</style>

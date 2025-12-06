@@ -2,6 +2,12 @@
 import SinglePriceService from "./single-service/SinglePriceService.astro";
 import "./services.css";
 
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
 const haircutServices = [
   {
     name: "Стрижка",
@@ -22,7 +28,7 @@ const haircutServices = [
 ];
 ---
 
-<section class="service-type-section">
+<section class="service-type-section" id={id}>
   <h2 class="service-section-title">Стрижка</h2>
 
   <div class="services-list">

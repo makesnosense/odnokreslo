@@ -1,4 +1,5 @@
 ---
+import Navigation from "../components/Navigation.astro";
 import Hero from "../components/Hero.astro";
 import Portfolio from "../components/Portfolio.astro";
 import ServicesHaircuts from "../components/services/ServicesHaircuts.astro";
@@ -11,67 +12,72 @@ import StructuredData from "../components/StructuredData.astro";
 ---
 
 <html lang="ru">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<SEO />
-		<StructuredData />
-		<ScrollReveal />
-		<script is:inline>
-			document.documentElement.style.setProperty(
-				"--viewport-height",
-				`${window.innerHeight}px`,
-			);
-		</script>
-	</head>
-	<body>
-		<Hero />
-		<Portfolio />
-		<ServicesHaircuts />
-		<ServicesColoring />
+    <SEO />
+    <StructuredData />
+    <ScrollReveal />
+    <script is:inline>
+      document.documentElement.style.setProperty(
+        "--viewport-height",
+        `${window.innerHeight}px`
+      );
+    </script>
+  </head>
+  <body>
+    <Navigation />
+    <Hero />
+    <Portfolio id="portfolio" />
+    <ServicesHaircuts id="services" />
+    <ServicesColoring />
 
-		<Appointment />
-		<Location />
-	</body>
+    <Appointment id="contacts" />
+    <Location />
+  </body>
 </html>
 
 <style is:global>
-	*,
-	*::before,
-	*::after {
-		font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
-			Arial, sans-serif;
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
+  *,
+  *::before,
+  *::after {
+    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
+      Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-	:root {
-		--padding-vertical: 4rem;
-		--padding-horizontal: clamp(2.5rem, 5vw, 4rem);
-	}
+  :root {
+    --padding-vertical: 4rem;
+    --padding-horizontal: clamp(2.5rem, 5vw, 4rem);
+  }
 
-	body {
-		min-height: 100dvh;
-		overflow-x: hidden;
-		background: white;
-		color: black;
-		text-transform: uppercase;
-	}
+  html {
+    scroll-behavior: smooth;
+  }
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	p {
-		margin: 0;
-		padding: 0;
-		font-size: inherit;
-		font-weight: inherit;
-		line-height: inherit;
-		font-family: inherit;
-	}
+  body {
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background: white;
+    color: black;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-family: inherit;
+  }
 </style>

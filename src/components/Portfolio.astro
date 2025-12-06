@@ -2,6 +2,12 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+
 type PortfolioPhoto = {
   readonly src: ImageMetadata;
   readonly alt: string;
@@ -31,7 +37,7 @@ const portfolioPhotos: readonly PortfolioPhoto[] = [
 ] as const;
 ---
 
-<section class="portfolio-section">
+<section class="portfolio-section" {id}>
   <div class="portfolio-grid">
     {
       portfolioPhotos.map((photo, index) => (
