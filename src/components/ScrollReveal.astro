@@ -14,9 +14,7 @@
   }, observerOptions);
 
   document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll(
-      "section",
-    );
+    const sections = document.querySelectorAll("section:not(.hero)");
     sections.forEach((section) => {
       section.classList.add("to-reveal");
       observer.observe(section);
