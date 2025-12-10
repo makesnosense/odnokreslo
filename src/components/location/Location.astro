@@ -7,7 +7,8 @@ import MapToggleButton from "./MapToggleButton.astro";
 <section class="location-section">
   <div class="address">
     <p class="street-address">
-      Москва, Новый Арбат, 34с1 <CopyAddressButton />
+      <span class="street-address-text">Москва, Новый Арбат, 34с1</span>
+      <CopyAddressButton />
     </p>
     <p>ПН–ВС: 13:00–22:00</p>
     <p>По предварительной записи</p>
@@ -22,23 +23,30 @@ import MapToggleButton from "./MapToggleButton.astro";
   <script>
     const copyBtn =
       document.querySelector<HTMLButtonElement>(".copy-address-btn");
-    if (!copyBtn) {
-      throw new Error("Copy address button not found");
+    const streetAddressText = document.querySelector<HTMLElement>(
+      ".street-address-text"
+    );
+
+    if (!copyBtn || !streetAddressText) {
+      throw new Error("Street address or copy address button not found");
     }
 
     const addressText = "Москва, Новый Арбат, 34с1";
 
-    copyBtn.addEventListener("click", async () => {
+    const copyAddress = async () => {
       try {
         await navigator.clipboard.writeText(addressText);
         copyBtn.classList.add("copied");
-        setTimeout(() => {
-          copyBtn.classList.remove("copied");
-        }, 2000);
+        streetAddressText.classList.add("copied");
+        setTimeout(() => copyBtn.classList.remove("copied"), 2000);
+        setTimeout(() => streetAddressText.classList.remove("copied"), 2000);
       } catch (err) {
-        console.error("failed to copy address:", err);
+        console.error("failed to copy:", err);
       }
-    });
+    };
+
+    copyBtn.addEventListener("click", copyAddress);
+    streetAddressText.addEventListener("click", copyAddress);
   </script>
 
   <script
@@ -83,19 +91,19 @@ import MapToggleButton from "./MapToggleButton.astro";
     );
 
     const mapContainer = document.querySelector<HTMLElement>(
-      ".location-section .map-container",
+      ".location-section .map-container"
     );
     const mapElement = document.querySelector<HTMLElement>(
-      ".location-section .map",
+      ".location-section .map"
     );
     const toggleBtn = document.querySelector<HTMLButtonElement>(
-      ".location-section .map-toggle-btn",
+      ".location-section .map-toggle-btn"
     );
     const mapHint = document.querySelector<HTMLElement>(
-      ".location-section .map-hint",
+      ".location-section .map-hint"
     );
     const openMapsBtn = document.querySelector<HTMLElement>(
-      ".yandex-open-maps-btn",
+      ".yandex-open-maps-btn"
     );
 
     if (
@@ -135,7 +143,7 @@ import MapToggleButton from "./MapToggleButton.astro";
         copyrightsPosition: "bottom right",
         behaviors: isTouchDevice ? [] : ["drag"],
       },
-      [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})],
+      [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]
     );
 
     const controls = new YMapControls({ position: "right" });
@@ -153,7 +161,7 @@ import MapToggleButton from "./MapToggleButton.astro";
         window.open(
           "https://yandex.ru/maps/-/CLbwQ87U",
           "_blank",
-          "noopener,noreferrer",
+          "noopener,noreferrer"
         );
       },
     });
@@ -243,6 +251,13 @@ import MapToggleButton from "./MapToggleButton.astro";
 
     .street-address {
       position: relative;
+    }
+
+    .street-address-text {
+      cursor: copy;
+    }
+    .street-address-text.copied {
+      cursor: text;
     }
 
     .address {
