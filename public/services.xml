@@ -52,7 +52,7 @@
       
       <!-- coloring services -->
       <offer id="coloring-001" available="true">
-        <name>Корни</name>
+        <name>Окрашивание корней</name>
         <url>https://odnokreslo.ru#services</url>
         <price>5000</price>
         <currencyId>RUR</currencyId>

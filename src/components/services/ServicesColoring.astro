@@ -11,7 +11,7 @@ type Service = SinglePriceServiceData | MultiPriceServiceData;
 
 const coloringServices: Service[] = [
   {
-    name: "Корни",
+    name: "Окрашивание корней",
     price: 5000,
   },
   {
@@ -41,7 +41,7 @@ const coloringServices: Service[] = [
 ];
 
 const isMultiPriceService = (
-  service: Service,
+  service: Service
 ): service is MultiPriceServiceData => {
   return "prices" in service;
 };
@@ -57,7 +57,7 @@ const isMultiPriceService = (
           <MultiPriceService name={service.name} prices={service.prices} />
         ) : (
           <SinglePriceService name={service.name} price={service.price} />
-        ),
+        )
       )
     }
   </div>
