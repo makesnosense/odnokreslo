@@ -1,0 +1,47 @@
+---
+import SinglePriceService from "./single-service/SinglePriceService.astro";
+import MultiPriceService from "./single-service/MultiPriceService.astro";
+import "./services.css";
+import type {
+  SinglePriceServiceData,
+  MultiPriceServiceData,
+} from "./single-service/service-types";
+
+type Service = SinglePriceServiceData | MultiPriceServiceData;
+
+const otherServices: Service[] = [
+  {
+    name: "Биозавивка",
+    prices: {
+      средние: 10000,
+      длинные: 15000,
+    },
+  },
+  {
+    name: "Уход",
+    price: 3000,
+  },
+];
+
+const isMultiPriceService = (
+  service: Service
+): service is MultiPriceServiceData => {
+  return "prices" in service;
+};
+---
+
+<section class="service-type-section">
+  <h2 class="service-section-title">Прочее</h2>
+
+  <div class="services-list">
+    {
+      otherServices.map((service) =>
+        isMultiPriceService(service) ? (
+          <MultiPriceService name={service.name} prices={service.prices} />
+        ) : (
+          <SinglePriceService name={service.name} price={service.price} />
+        )
+      )
+    }
+  </div>
+</section>

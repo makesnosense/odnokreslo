@@ -9,6 +9,7 @@ import Appointment from "../components/Appointment.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 import SEO from "../components/SEO.astro";
 import StructuredData from "../components/StructuredData.astro";
+import ServicesOther from "../components/services/ServicesOther.astro";
 ---
 
 <html lang="ru">
@@ -32,7 +33,7 @@ import StructuredData from "../components/StructuredData.astro";
     <Portfolio id="portfolio" />
     <ServicesHaircuts id="services" />
     <ServicesColoring />
-
+    <ServicesOther />
     <Appointment id="contacts" />
     <Location />
   </body>
@@ -42,8 +43,9 @@ import StructuredData from "../components/StructuredData.astro";
   *,
   *::before,
   *::after {
-    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
-      Arial, sans-serif;
+    font-family:
+      Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial,
+      sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;

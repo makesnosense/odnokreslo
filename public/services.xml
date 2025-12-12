@@ -7,6 +7,7 @@
     <categories>
       <category id="1">Стрижка</category>
       <category id="2">Окрашивание</category>
+      <category id="3">Прочее</category>
     </categories>
     <offers>
       <!-- haircut services -->
@@ -65,6 +66,21 @@
         <price>20000</price>
         <currencyId>RUR</currencyId>
         <categoryId>2</categoryId>
+      </offer>
+      
+      <!-- other services -->
+      <offer id="other-001">
+        <name>Биозавивка</name>
+        <price>10000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>3</categoryId>
+      </offer>
+      
+      <offer id="other-002">
+        <name>Уход</name>
+        <price>3000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>3</categoryId>
       </offer>
     </offers>
   </shop>
