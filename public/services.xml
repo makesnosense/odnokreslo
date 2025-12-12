@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog date="2024-12-12T15:00:00+03:00">
+  <shop>
+    <name>Одно Кресло</name>
+    <company>Одно Кресло</company>
+    <url>https://odnokreslo.ru</url>
+    <categories>
+      <category id="1">Стрижка</category>
+      <category id="2">Окрашивание</category>
+    </categories>
+    <offers>
+      <!-- haircut services -->
+      <offer id="haircut-001">
+        <name>Стрижка</name>
+        <price>3000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>1</categoryId>
+      </offer>
+      
+      <offer id="haircut-002">
+        <name>Стрижка чёлки</name>
+        <price>1000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>1</categoryId>
+      </offer>
+      
+      <offer id="haircut-003">
+        <name>Стрижка концов</name>
+        <price>1500</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>1</categoryId>
+      </offer>
+      
+      <offer id="haircut-004">
+        <name>Стрижка бороды</name>
+        <price>2000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>1</categoryId>
+      </offer>
+      
+      <!-- coloring services -->
+      <offer id="coloring-001">
+        <name>Корни</name>
+        <price>5000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>2</categoryId>
+      </offer>
+      
+      <offer id="coloring-002">
+        <name>Тонирование</name>
+        <price>4000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>2</categoryId>
+      </offer>
+      
+      <offer id="coloring-003">
+        <name>Тотал блонд</name>
+        <price>10000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>2</categoryId>
+      </offer>
+      
+      <offer id="coloring-004">
+        <name>Air Touch</name>
+        <price>20000</price>
+        <currencyId>RUR</currencyId>
+        <categoryId>2</categoryId>
+      </offer>
+    </offers>
+  </shop>
+</yml_catalog>
