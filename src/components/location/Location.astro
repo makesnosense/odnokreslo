@@ -86,9 +86,8 @@ import MapToggleButton from "./MapToggleButton.astro";
       YMapControls,
       YMapDefaultFeaturesLayer,
     } = ymaps3;
-    const { YMapZoomControl, YMapDefaultMarker } = await import(
-      "@yandex/ymaps3-default-ui-theme"
-    );
+    const { YMapZoomControl, YMapDefaultMarker } =
+      await import("@yandex/ymaps3-default-ui-theme");
 
     const mapContainer = document.querySelector<HTMLElement>(
       ".location-section .map-container"
@@ -246,7 +245,7 @@ import MapToggleButton from "./MapToggleButton.astro";
       justify-content: center;
       align-items: center;
       row-gap: 1rem;
-      padding-top: 1rem;
+      padding-top: 4rem;
     }
 
     .street-address {
