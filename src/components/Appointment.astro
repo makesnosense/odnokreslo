@@ -22,7 +22,7 @@ const { id } = Astro.props;
       <svg
         class="messenger-icon"
         role="img"
-        viewBox="0 0 24 24"
+        viewBox="-2 -2 28 28"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path d={siTelegram.path}></path>
@@ -77,7 +77,6 @@ const { id } = Astro.props;
     color: inherit;
     text-decoration: none;
     display: flex;
-    align-items: center;
     gap: 0.33rem;
     white-space: nowrap;
 
@@ -94,10 +93,9 @@ const { id } = Astro.props;
     text-decoration: none;
     width: fit-content;
     display: flex;
-
     align-items: center;
 
-    gap: 0.4rem;
+    gap: 0.2rem;
 
     &:visited {
       color: inherit;
@@ -106,10 +104,12 @@ const { id } = Astro.props;
     & .messenger-icon {
       width: 1.4rem;
       height: 1.4rem;
+      transform: translateX(-2px);
     }
 
     & .messenger-username {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+
       color: black;
       border-bottom: 0.5px solid rgba(0, 0, 0);
     }
