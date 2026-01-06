@@ -27,9 +27,10 @@ const { id } = Astro.props;
       >
         <path d={siTelegram.path}></path>
       </svg>
+      <div class="messenger-username">kresloodno</div>
     </a>
 
-    <a
+    <!-- <a
       href="https://wa.me/message/SJSNIMWPB2UOJ1"
       class="contact-link"
       aria-label="записаться через WhatsApp"
@@ -42,7 +43,7 @@ const { id } = Astro.props;
       >
         <path d={siWhatsapp.path}></path>
       </svg>
-    </a>
+    </a> -->
   </div>
 </section>
 
@@ -90,11 +91,27 @@ const { id } = Astro.props;
   }
 
   .contact-link {
+    text-decoration: none;
     width: fit-content;
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.4rem;
+
+    &:visited {
+      color: inherit;
+    }
 
     & .messenger-icon {
-      width: 2rem;
-      height: 2rem;
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+
+    & .messenger-username {
+      transform: translateY(-1px);
+      color: black;
+      border-bottom: 0.5px solid rgba(0, 0, 0);
     }
 
     &:hover {
