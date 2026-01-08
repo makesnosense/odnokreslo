@@ -9,9 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/sitemap": "^3.6.1",
     "@yandex/ymaps3-default-ui-theme": "^0.0.19",
-    "astro": "^5.15.3",
+    "astro": "^5.16.7",
     "simple-icons": "^15.16.1"
   },
   "devDependencies": {
