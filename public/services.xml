@@ -98,12 +98,12 @@
       </offer>
       
       <offer id="other-002" available="true">
-        <name>Уход</name>
+        <name>Укладка</name>
         <url>https://odnokreslo.ru#services</url>
-        <price>3000</price>
+        <price>2000</price>
         <currencyId>RUR</currencyId>
         <categoryId>3</categoryId>
-        <description>Уход за волосами</description>
+        <description>Мытье головы и укладка на браш</description>
       </offer>
     </offers>
   </shop>

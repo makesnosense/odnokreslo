@@ -18,13 +18,13 @@ const otherServices: Service[] = [
     },
   },
   {
-    name: "Уход",
-    price: 3000,
+    name: "Укладка",
+    price: 2000,
   },
 ];
 
 const isMultiPriceService = (
-  service: Service
+  service: Service,
 ): service is MultiPriceServiceData => {
   return "prices" in service;
 };
@@ -40,7 +40,7 @@ const isMultiPriceService = (
           <MultiPriceService name={service.name} prices={service.prices} />
         ) : (
           <SinglePriceService name={service.name} price={service.price} />
-        )
+        ),
       )
     }
   </div>
