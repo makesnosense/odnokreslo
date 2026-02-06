@@ -35,7 +35,7 @@
       <offer id="haircut-003" available="true">
         <name>Стрижка концов</name>
         <url>https://odnokreslo.ru#services</url>
-        <price>1500</price>
+        <price>2000</price>
         <currencyId>RUR</currencyId>
         <categoryId>1</categoryId>
         <description>Стрижка концов волос</description>
