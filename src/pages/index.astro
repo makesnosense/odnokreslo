@@ -23,7 +23,7 @@ import ServicesOther from "../components/services/ServicesOther.astro";
     <script is:inline>
       document.documentElement.style.setProperty(
         "--viewport-height",
-        `${window.innerHeight}px`
+        `${window.innerHeight}px`,
       );
     </script>
   </head>
@@ -54,6 +54,10 @@ import ServicesOther from "../components/services/ServicesOther.astro";
   :root {
     --padding-vertical: 4rem;
     --padding-horizontal: clamp(2.5rem, 5vw, 4rem);
+
+    @media (max-width: 340px) {
+      --padding-horizontal: 1.5rem;
+    }
   }
 
   html {
