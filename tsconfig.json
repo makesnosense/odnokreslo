@@ -1,20 +1,12 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [
-    ".astro/types.d.ts",
-    "**/*"
-  ],
-  "exclude": [
-    "dist"
-  ],
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules"],
   "compilerOptions": {
     "target": "es2022",
     "module": "es2022",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "moduleResolution": "bundler",
     "typeRoots": [
@@ -22,9 +14,7 @@
       "./node_modules/@yandex/ymaps3-types"
     ],
     "paths": {
-      "ymaps3": [
-        "./node_modules/@yandex/ymaps3-types"
-      ]
+      "ymaps3": ["./node_modules/@yandex/ymaps3-types"]
     }
   }
 }

@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.1",
+    "@lucide/astro": "^0.563.0",
     "astro": "^5.16.7",
-    "simple-icons": "^15.16.1"
+    "simple-icons": "^16.8.0"
   },
   "devDependencies": {
     "@yandex/ymaps3-types": "^1.0.17798529",
