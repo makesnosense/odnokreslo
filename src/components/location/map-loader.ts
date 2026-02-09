@@ -6,6 +6,23 @@ declare global {
   }
 }
 
+declare module "@yandex/ymaps3-types/import" {
+  interface Import {
+    (pkg: "@yandex/ymaps3-default-ui-theme"): Promise<{
+      YMapZoomControl: new (options: { easing?: string }) => any;
+      YMapDefaultMarker: new (options: {
+        coordinates: [number, number];
+        iconName?: string;
+        title?: string;
+        subtitle?: string;
+        color?: string;
+        size?: string;
+        onClick?: () => void;
+      }) => any;
+    }>;
+  }
+}
+
 const ensureYmaps3Ready = (): Promise<void> => {
   return new Promise((resolve) => {
     const checkYmapsLoaded = () => {
