@@ -1,13 +1,16 @@
 ---
+import Link from "./Link.astro";
+
 const navItems = [
-  { label: "Работы", href: "#portfolio" },
+  { label: "Работы", href: "#portfolio", hideOnMobile: true },
   { label: "Услуги", href: "#services" },
   { label: "Контакты", href: "#contacts" },
 ];
 ---
 
 <nav class="navigation">
-  {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+  {navItems.map((item) => <Link {...item} />)}
+
 </nav>
 
 <style>

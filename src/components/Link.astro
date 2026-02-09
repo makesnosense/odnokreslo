@@ -1,0 +1,53 @@
+---
+import { ExternalLink } from "@lucide/astro";
+
+interface Props {
+  href: string;
+  label: string;
+  external?: boolean;
+  hideOnMobile?: boolean;
+}
+
+const { href, label, external = false, hideOnMobile = false } = Astro.props;
+---
+
+<a
+  href={href}
+  class={hideOnMobile ? "hide-mobile" : ""}
+  {...external && {
+    target: "_blank",
+    rel: "noopener noreferrer",
+  }}
+>
+  {label}
+  {external && <ExternalLink size={14} />}
+</a>
+
+<style>
+  a {
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+
+    text-decoration: none;
+
+    border-bottom: 0.5px solid rgba(0, 0, 0);
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &:any-link {
+      color: inherit;
+    }
+  }
+
+  & svg {
+    transform: translateY(1px);
+  }
+
+  @media (max-width: 460px) {
+    .hide-mobile {
+      display: none;
+    }
+  }
+</style>
