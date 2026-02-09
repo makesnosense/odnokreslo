@@ -6,11 +6,14 @@ const navItems = [
   { label: "Услуги", href: "#services" },
   { label: "Контакты", href: "#contacts" },
 ];
+
+const yclientsUrl = "https://n1968617.yclients.com";
 ---
 
 <nav class="navigation">
   {navItems.map((item) => <Link {...item} />)}
 
+  <Link href={yclientsUrl} label="Запись" external />
 </nav>
 
 <style>
@@ -26,22 +29,5 @@ const navItems = [
     justify-content: space-between;
 
     padding: 1.25rem var(--padding-horizontal);
-  }
-
-  a {
-    text-transform: uppercase;
-    transition: opacity 0.3s ease;
-
-    text-decoration: none;
-
-    border-bottom: 0.5px solid rgba(0, 0, 0);
-
-    &:hover {
-      opacity: 0.6;
-    }
-
-    &:any-link {
-      color: inherit;
-    }
   }
 </style>
