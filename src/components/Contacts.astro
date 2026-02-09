@@ -1,5 +1,6 @@
 ---
-import { siTelegram, siWhatsapp } from "simple-icons";
+import { siTelegram } from "simple-icons";
+import Link from "./Link.astro";
 
 interface Props {
   id: string;
@@ -8,12 +9,12 @@ interface Props {
 const { id } = Astro.props;
 ---
 
-<section class="book-an-appointment-section" id={id}>
-  <h2 class="section-title">Запись:</h2>
+<section class="contacts-section" id={id}>
   <div class="contacts-container">
     <a href="tel:+79175730053" class="contact-link-with-number">
       <span class="phone-number">+7 917 573-00-53</span>
     </a>
+
     <a
       href="https://t.me/kresloodno"
       class="contact-link"
@@ -48,10 +49,9 @@ const { id } = Astro.props;
 </section>
 
 <style>
-  .book-an-appointment-section {
+  .contacts-section {
     display: flex;
     justify-content: center;
-    column-gap: 1rem;
     padding: 4rem var(--padding-horizontal);
   }
 
@@ -60,7 +60,7 @@ const { id } = Astro.props;
     flex-direction: column;
     row-gap: 2.5rem;
     column-gap: 1rem;
-    align-items: left;
+    align-items: center;
 
     & svg {
       display: block;
@@ -102,14 +102,12 @@ const { id } = Astro.props;
     }
 
     & .messenger-icon {
-      width: 1.4rem;
-      height: 1.4rem;
-      transform: translateX(-2px);
+      width: 1.1rem;
+      height: 1.1rem;
+      transform: translateY(1px);
     }
 
     & .messenger-username {
-      transform: translateY(-1px);
-
       color: black;
       border-bottom: 0.5px solid rgba(0, 0, 0);
     }
