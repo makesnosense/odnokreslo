@@ -8,7 +8,7 @@ export default defineConfig({
   vite: {
     plugins: [
       visualizer({
-        open: true,
+        open: false,
         filename: "dist/stats.html",
       }),
     ],
