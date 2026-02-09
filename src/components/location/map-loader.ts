@@ -1,5 +1,4 @@
 import type { YMapLocationRequest } from "@yandex/ymaps3-types";
-import "@yandex/ymaps3-default-ui-theme/dist/esm/index.css";
 
 declare global {
   interface Window {
@@ -23,6 +22,11 @@ const ensureYmaps3Ready = (): Promise<void> => {
 export const initializeMap = async () => {
   await ensureYmaps3Ready();
 
+  ymaps3.import.registerCdn(
+    "https://cdn.jsdelivr.net/npm/{package}",
+    "@yandex/ymaps3-default-ui-theme@0.0.24",
+  );
+
   const {
     YMap,
     YMapDefaultSchemeLayer,
@@ -30,8 +34,9 @@ export const initializeMap = async () => {
     YMapDefaultFeaturesLayer,
   } = ymaps3;
 
-  const { YMapZoomControl, YMapDefaultMarker } =
-    await import("@yandex/ymaps3-default-ui-theme");
+  const { YMapZoomControl, YMapDefaultMarker } = await ymaps3.import(
+    "@yandex/ymaps3-default-ui-theme",
+  );
 
   const mapContainer = document.querySelector<HTMLElement>(
     ".location-section .map-container",
