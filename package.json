@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.1",
-    "@yandex/ymaps3-default-ui-theme": "^0.0.19",
+    "@yandex/ymaps3-default-ui-theme": "^0.0.24",
     "astro": "^5.16.7",
     "simple-icons": "^15.16.1"
   },
   "devDependencies": {
-    "@yandex/ymaps3-types": "^1.0.17798529"
+    "@yandex/ymaps3-types": "^1.0.17798529",
+    "rollup-plugin-visualizer": "^6.0.5"
   }
 }
