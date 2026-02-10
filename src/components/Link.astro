@@ -19,18 +19,22 @@ const { href, label, external = false, hideOnMobile = false } = Astro.props;
     rel: "noopener noreferrer",
   }}
 >
-  {label}
-  {external && <ExternalLink size={14} />}
+  <slot />
+  <span class="link-label">
+    {label}
+    {external && <ExternalLink class="external-link-icon" size={14} />}</span
+  >
 </a>
 
 <style>
   a {
     text-transform: uppercase;
     transition: opacity 0.3s ease;
-
     text-decoration: none;
 
-    border-bottom: 0.5px solid rgba(0, 0, 0);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 
     &:hover {
       opacity: 0.6;
@@ -39,10 +43,14 @@ const { href, label, external = false, hideOnMobile = false } = Astro.props;
     &:any-link {
       color: inherit;
     }
-  }
 
-  & svg {
-    transform: translateY(1px);
+    .link-label {
+      border-bottom: 0.5px solid rgba(0, 0, 0);
+    }
+
+    .external-link-icon {
+      transform: translateY(1px);
+    }
   }
 
   @media (max-width: 460px) {
