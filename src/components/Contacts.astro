@@ -1,6 +1,7 @@
 ---
 import { siTelegram } from "simple-icons";
-import Link from "./Link.astro";
+import yclientsIcon from "../images/icons/yclients.svg";
+import { yclientsUrl } from "./Navigation.astro";
 
 interface Props {
   id: string;
@@ -31,20 +32,14 @@ const { id } = Astro.props;
       <div class="messenger-username">kresloodno</div>
     </a>
 
-    <!-- <a
-      href="https://wa.me/message/SJSNIMWPB2UOJ1"
+    <a
+      href={yclientsUrl}
       class="contact-link"
-      aria-label="записаться через WhatsApp"
+      aria-label="записаться через Telegram"
     >
-      <svg
-        class="messenger-icon"
-        role="img"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d={siWhatsapp.path}></path>
-      </svg>
-    </a> -->
+      <img src={yclientsIcon.src} alt="YClients" class="yclients-icon" />
+      <div class="messenger-username">Онлайн-запись</div>
+    </a>
   </div>
 </section>
 
@@ -110,6 +105,12 @@ const { id } = Astro.props;
     & .messenger-username {
       color: black;
       border-bottom: 0.5px solid rgba(0, 0, 0);
+    }
+
+    & .yclients-icon {
+      width: 0.95rem;
+      height: 0.95rem;
+      transform: translateY(1px);
     }
 
     &:hover {
